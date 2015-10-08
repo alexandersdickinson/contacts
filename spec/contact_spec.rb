@@ -40,11 +40,28 @@ describe(Contact) do
     end
   end
   
+  describe("#save") do
+    it("adds the contact to the list of contacts") do
+      test_contact = @@create_contact.call(:phone, "")
+      test_contact.save()
+      expect(Contact.all()[0]).to(eq(test_contact))
+    end
+  end
+  
   describe(".all") do
     it("starts as an empty array") do
       expect(Contact.all()).to(eq([]))
     end
   end
   
-  describe()
+  describe(".clear") do
+    it("empties the array containing all contacts") do
+      contact1 = @@create_contact.call(:phone, "")
+      contact1.save()
+      contact2 = @@create_contact.call(:phone, "")
+      contact2.save()
+      Contact.clear()
+      expect(Contact.all()).to(eq([]))
+    end
+  end
 end
