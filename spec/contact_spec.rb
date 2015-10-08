@@ -15,21 +15,45 @@ describe(Contact) do
   describe("#phone") do
     it("returns the contact\'s phone number") do
       test_phone = "555-0869"
-      expect(@@create_contact.call(:phone, test_phone).phone()).to(eq(test_phone))
+      expect(@@create_contact.call(:phone, test_phone).phone()).to(eq([test_phone]))
+    end
+    
+    it("returns a list of phone numbers") do
+      test_phone1 = "555-0869"
+      test_phone2 = "555-9510"
+      test_contact = @@create_contact.call(:phone, test_phone1)
+      test_contact.add_phone(test_phone2)
+      expect(test_contact.phone()).to(eq([test_phone1, test_phone2]))
     end
   end
   
   describe("#address") do
     it("returns an object representing contact\'s address") do
       test_address = Address.new({:street_address => "", :city => "", :state => "", :zip_code => ""})
-      expect(@@create_contact.call(:address, test_address).address()).to(eq(test_address))
+      expect(@@create_contact.call(:address, test_address).address()).to(eq([test_address]))
+    end
+    
+    it("returns a list of addresses") do
+      test_address1 = "Fake Street"
+      test_address2 = "Ersatz Street"
+      test_contact = @@create_contact.call(:address, test_address1)
+      test_contact.add_address(test_address2)
+      expect(test_contact.address()).to(eq([test_address1, test_address2]))
     end
   end
   
   describe("#email") do
     it("returns an email address") do
       test_email = "fakeemail@aol.com"
-      expect(@@create_contact.call(:email, test_email).email()).to(eq(test_email))
+      expect(@@create_contact.call(:email, test_email).email()).to(eq([test_email]))
+    end
+    
+    it("returns a list of email addresses") do
+      test_email1 = "fake@aol.com"
+      test_email2 = "fake@yahoo.com"
+      test_contact = @@create_contact.call(:email, test_email1)
+      test_contact.add_email(test_email2)
+      expect(test_contact.email()).to(eq([test_email1, test_email2]))
     end
   end
   
