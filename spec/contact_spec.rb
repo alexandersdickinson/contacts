@@ -7,20 +7,40 @@ describe(Contact) do
   
   @@create_contact = lambda do |key, value|
     fake_address = Address.new({:street_address => "", :city => "", :state => "", :zip_code => ""})
-    attributes = {:phone => "", :address => fake_address, :email => "", :job_title => ""}
+    attributes = {:first_name => "", :last_name => "", :phone => "", :address => fake_address, :email => "", :job_title => ""}
     attributes.merge!({key => value})
     Contact.new(attributes)
   end
   
+  describe("#id") do
+    it("returns the id") do
+      expect(@@create_contact.call(:phone, "").id()).to(eq(1))
+    end
+  end
+  
+  describe("#first_name") do
+    it("returns the first name") do
+      test_name = "John"
+      expect(@@create_contact.call(:first_name, test_name).first_name()).to(eq(test_name))
+    end
+  end
+  
+  describe("#last_name") do
+    it("returns the last name") do
+      test_name = "Smith"
+      expect(@@create_contact.call(:last_name, test_name).last_name()).to(eq(test_name))
+    end
+  end
+  
   describe("#phone") do
     it("returns the contact\'s phone number") do
-      test_phone = "555-0869"
+      test_phone = "555-0199"
       expect(@@create_contact.call(:phone, test_phone).phone()).to(eq([test_phone]))
     end
     
     it("returns a list of phone numbers") do
-      test_phone1 = "555-0869"
-      test_phone2 = "555-9510"
+      test_phone1 = "555-1099"
+      test_phone2 = "555-0199"
       test_contact = @@create_contact.call(:phone, test_phone1)
       test_contact.add_phone(test_phone2)
       expect(test_contact.phone()).to(eq([test_phone1, test_phone2]))
@@ -86,6 +106,18 @@ describe(Contact) do
       contact2.save()
       Contact.clear()
       expect(Contact.all()).to(eq([]))
+    end
+  end
+  
+  describe(".find") do
+    it("finds a contact associated with an id number") do
+      contact1 = @@create_contact.call(:first_name, "Ralph")
+      contact1.save()
+      contact2 = @@create_contact.call(:first_name, "Bob")
+      contact2.save()
+      contact3 = @@create_contact.call(:first_name, "Phillip")
+      contact3.save()
+      expect(Contact.find(contact2.id())).to(eq(contact2))
     end
   end
 end

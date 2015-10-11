@@ -1,0 +1,22 @@
+.form-inline .street-address{
+	width: 75%;
+	margin: auto 10px;
+}
+
+.form-inline .three-digits{
+	width: 70px;
+}
+
+.form-inline .last-four{
+	width: 90px;
+}
+
+.form-inline .city-zip{
+	width: 120px;
+	margin: auto 10px;
+}
+
+.form-inline .state{
+	width: 45px;
+	margin: auto 10px;
+}

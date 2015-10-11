@@ -16,7 +16,7 @@ describe(PhoneNumber) do
   
   describe("#number") do
     it("returns a seven digit phone number") do
-      test_number = 5550869
+      test_number = 5550199
       expect(@@create_phone_number.call(:number, test_number).number()).to(eq(test_number))
     end
   end
