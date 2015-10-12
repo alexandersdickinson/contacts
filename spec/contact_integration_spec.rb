@@ -21,8 +21,8 @@ describe("the new contact path", :type => :feature) do
     fill_in('job_title', :with => "Certified Miner On-Duty")
     click_button("Save Contact")
     click_link("Smith, John")
-    expect(page).to(have_content("John Smith"))
-    expect(page).to(have_content("5555, Long Beach, CA 90210"))
+    expect(page).to(have_content("Smith, John"))
+    expect(page).to(have_content("5555 Long Beach, CA 90210"))
     expect(page).to(have_content("(626) 555-5555"))
     expect(page).to(have_content("fake@aol.com"))
     expect(page).to(have_content("Certified Miner On-Duty"))
@@ -45,9 +45,6 @@ describe("the new contact path", :type => :feature) do
     fill_in('job_title', :with => "Certified Miner On-Duty")
     click_button("Save Contact")
     expect(page).to(have_content("Porter, Bob Smith, John"))
-  end
-  
-  it("does not display fields left as blank") do
   end
 end
 

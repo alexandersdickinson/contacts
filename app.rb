@@ -27,8 +27,10 @@ post('/') do
 end
 
 get('/:id') do
-  @contact = Contact.find(params.fetch(id))
-  @phone_number = @contact.phone()
+  @contact = Contact.find(params.fetch('id').to_i())
+  @phone_numbers = @contact.phone()
+  @addresses = @contact.address()
+  @emails = @contact.email()
   @header = "#{@contact.last_name()}, #{@contact.first_name()}"
   erb(:contact)
 end

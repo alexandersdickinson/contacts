@@ -7,4 +7,8 @@ class Address
     @state = attributes.fetch(:state)
     @zip_code = attributes.fetch(:zip_code)
   end
+  
+  def to_s()
+    "#{@street_address}\n#{@city}, #{@state} #{@zip_code}"
+  end
 end

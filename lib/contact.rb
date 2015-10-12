@@ -19,12 +19,36 @@ class Contact
     @phone.push(phone)
   end
   
+  def delete_phone(index)
+    @phone.delete_at(index)
+  end
+  
+  def edit_phone(index, replacement)
+    @phone[index] = replacement
+  end
+  
   def add_address(address)
     @address.push(address)
   end
   
+  def delete_address(index)
+    @address.delete_at(index)
+  end
+  
+  def edit_address(index, replacement)
+    @address[index] = replacement
+  end
+  
   def add_email(email)
     @email.push(email)
+  end
+  
+  def delete_email(index)
+    @email.delete_at(index)
+  end
+  
+  def edit_email(index, replacement)
+    @email[index] = replacement
   end
   
   def save()

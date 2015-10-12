@@ -34,4 +34,11 @@ describe(Address) do
       expect(@@create_address.call(:zip_code, test_zip_code).zip_code()).to(eq(test_zip_code))
     end
   end
+  
+  describe("#to_s") do
+    it("returns the address formatted") do
+      test_address = Address.new({:street_address => "5555 Fake Street", :city => "Compton", :state => "CA", :zip_code => 90210})
+      expect(test_address.to_s()).to(eq("5555 Fake Street\nCompton, CA 90210"))
+    end
+  end
 end

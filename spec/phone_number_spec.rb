@@ -27,4 +27,11 @@ describe(PhoneNumber) do
       expect(@@create_phone_number.call(:type, test_type).type()).to(eq(test_type))
     end
   end
+  
+  describe("#to_s") do
+    it("prints the phone number in Type: (555) 555-1099 format") do
+      test_number = PhoneNumber.new({:area_code => 555, :number => 5551099, :type => "Mobile"})
+      expect(test_number.to_s()).to(eq("Mobile: (555) 555-1099"))
+    end
+  end
 end
