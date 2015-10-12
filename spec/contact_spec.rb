@@ -90,6 +90,16 @@ describe(Contact) do
       test_contact.save()
       expect(Contact.all()[0]).to(eq(test_contact))
     end
+    
+    it("sorts contacts alphabetically by last name") do
+      test_contact = @@create_contact.call(:last_name, "Zachary")
+      test_contact.save()
+      test_contact2 = @@create_contact.call(:last_name, "Peters")
+      test_contact2.save()
+      test_contact3 = @@create_contact.call(:last_name, "Thompson")
+      test_contact3.save()
+      expect(Contact.all()).to(eq([test_contact2, test_contact3, test_contact]))
+    end
   end
   
   describe(".all") do
@@ -118,6 +128,81 @@ describe(Contact) do
       contact3 = @@create_contact.call(:first_name, "Phillip")
       contact3.save()
       expect(Contact.find(contact2.id())).to(eq(contact2))
+    end
+  end
+  
+  describe("#add_address") do
+    it("adds an address") do
+      test_contact = @@create_contact.call(:address, "Fake Address")
+      test_contact.add_address("Another Fake Address")
+      expect(test_contact.address()).to(eq(["Fake Address", "Another Fake Address"]))
+    end
+  end
+  
+  describe("#delete_address") do
+    it("deletes an address") do
+      test_contact = @@create_contact.call(:address, "Fake Address")
+      test_contact.add_address("Another Fake Address")
+      test_contact.delete_address(0)
+      expect(test_contact.address()).to(eq(["Another Fake Address"]))
+    end
+  end
+  
+  describe("#edit_address") do
+    it("edits an address") do
+      test_contact = @@create_contact.call(:address, "Fake Address")
+      test_contact.edit_address(0, "Replacement Address")
+      expect(test_contact.address()).to(eq(["Replacement Address"]))
+    end
+  end
+  
+  describe("#add_phone") do
+    it("adds a phone number") do
+      test_contact = @@create_contact.call(:phone, "Fake Phone")
+      test_contact.add_phone("Another Fake Phone")
+      expect(test_contact.phone()).to(eq(["Fake Phone", "Another Fake Phone"]))
+    end
+  end
+  
+  describe("#delete_phone") do
+    it("deletes a phone number") do
+      test_contact = @@create_contact.call(:phone, "Fake Phone")
+      test_contact.add_phone("Another Fake Phone")
+      test_contact.delete_phone(0)
+      expect(test_contact.phone()).to(eq(["Another Fake Phone"]))
+    end
+  end
+  
+  describe("#edit_phone") do
+    it("edits a phone") do
+      test_contact = @@create_contact.call(:phone, "Fake Phone")
+      test_contact.edit_phone(0, "Replacement Phone")
+      expect(test_contact.phone()).to(eq(["Replacement Phone"]))
+    end
+  end
+  
+  describe("#add_email") do
+    it("adds an email") do
+      test_contact = @@create_contact.call(:email, "Fake Email")
+      test_contact.add_email("Another Fake Email")
+      expect(test_contact.email()).to(eq(["Fake Email", "Another Fake Email"]))
+    end
+  end
+  
+  describe("#delete_email") do
+    it("deletes an email") do
+      test_contact = @@create_contact.call(:email, "Fake Email")
+      test_contact.add_email("Another Fake Email")
+      test_contact.delete_email(0)
+      expect(test_contact.email()).to(eq(["Another Fake Email"]))
+    end
+  end
+  
+  describe("#edit_email") do
+    it("edits an email") do
+      test_contact = @@create_contact.call(:email, "Fake Email")
+      test_contact.edit_email(0, "Replacement Email")
+      expect(test_contact.email()).to(eq(["Replacement Email"]))
     end
   end
 end

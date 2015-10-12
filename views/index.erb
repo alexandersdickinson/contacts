@@ -1,6 +1,6 @@
 <%@contacts.each() do |contact|%>
 	<h2><li>
-		
+		<a href='/<%= contact.id()%>'><%= "#{contact.last_name()}, #{contact.first_name()}"%></a>
 	</li></h2>
 <%end%>
 

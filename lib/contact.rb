@@ -29,6 +29,7 @@ class Contact
   
   def save()
     @@contacts.push(self)
+    Contact.alpha_sort(@@contacts)
   end
   
   def self.all()
@@ -42,6 +43,32 @@ class Contact
   def self.find(id)
     @@contacts.each() do |contact|
       return contact if contact.id() == id
+    end
+  end
+  
+  def self.alpha_sort(collection)
+    collection.sort! do |a,b|
+      name1 = a.last_name().split('')
+      name2 = b.last_name().split('')
+      char1 = ''
+      char2 = ''
+      name1.each_index() do |i|
+        break if i >= name2.length()
+        char1 = name1[i].upcase()
+        char2 = name2[i].upcase()
+        if char1 == char2
+          next
+        else
+          break
+        end
+      end
+      if char1 > char2
+        1
+      elsif a == b
+        0
+      else
+        -1
+      end
     end
   end
 end
