@@ -50,6 +50,14 @@ end
 
 describe("the attribute creation path", :type => :feature) do
   it("adds a phone number to an existing contact") do
+    visit('/')
+    click_link("Smith, John")
+    fill_in('area_code', :with => "626")
+    fill_in('first_three_digits', :with => "555")
+    fill_in('last_four_digits', :with => "0199")
+    choose("Mobile")
+    click_button("Add Phone Number")
+    expect(page).to(have_content("(626) 555-0199"))
   end
   
   it("adds an address to an existing contact") do

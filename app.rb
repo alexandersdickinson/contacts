@@ -34,3 +34,14 @@ get('/:id') do
   @header = "#{@contact.last_name()}, #{@contact.first_name()}"
   erb(:contact)
 end
+
+post('/:id') do
+  @contact = Contact.find(params.fetch('id').to_i())
+  new_phone = PhoneNumber.new({:area_code => params.fetch('area_code').to_i(), :number => (params.fetch('first_three_digits') + params.fetch('last_four_digits')).to_i(), :type => params.fetch('phone_type')})
+  @contact.add_phone(new_phone)
+  @phone_numbers = @contact.phone()
+  @addresses = @contact.address()
+  @emails = @contact.email()
+  @header = "#{@contact.last_name()}, #{@contact.first_name()}"
+  erb(:contact)
+end
