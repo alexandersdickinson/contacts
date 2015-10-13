@@ -1,15 +1,32 @@
 <h1><%= @contact.job_title()%></h1>
 <h2>Address</h2>
 <ul>
-	<h3><li>
-		<%@addresses.each() do |address|%>
+	<%@addresses.each() do |address|%>
+		<h3><li>
 			<%address.to_s().each_line() do |line|%>
 				<%= line%>
 				<br>
 			<%end%>
-		<%end%>
-	</li></h3>
+		</li></h3>
+	<%end%>
 </ul>
+<form action='/<%= @contact.id()%>/new_address' method='post'>
+	<div class='row'>
+		<div class='form-group col-md-6 form-inline'>
+			<label for='street_address'>Street Address</label>
+			<input type='text' name='street_address' id='street_address' class='form-control street-address'>
+		</div>
+		<div class='form-group col-md-6 form-inline'>
+			<label for='city'>City</label>
+			<input type='text' name='city' id='city' class='form-control city-zip'>
+			<label for='state'>State</label>
+			<input type='text' name='state' id='state' class='form-control state'>
+			<label for='zip_code'>Zip Code</label>
+			<input type='number' name='zip_code' id='zip_code' class='form-control city-zip' max='99999'>
+		</div>
+	</div>
+	<button type='submit' class='btn btn-primary'>Add Address</button>
+</form>
 
 <h2>Phone</h2>
 <ul>
@@ -17,7 +34,7 @@
 		<h3><li><%= number%></li></h3>
 	<%end%>
 </ul>
-<form action='/<%= @contact.id()%>' method='post'>
+<form action='/<%= @contact.id()%>/new_phone' method='post'>
 	<div class='row'>
 		<div class='form-group form-inline col-md-5'>
 			<label for='area_code'>Phone Number</label>
@@ -39,10 +56,8 @@
 		      <input type="radio" name="phone_type" value="home">Home
 		    </label>
 		</div>
-		<div class='col-md-2'>
-			<button type='submit' class='btn btn-primary'>Add Phone Number</button>
-		</div>
 	</div>
+	<button type='submit' class='btn btn-primary'>Add Phone Number</button>
 </form>
 
 <h2>Email</h2>

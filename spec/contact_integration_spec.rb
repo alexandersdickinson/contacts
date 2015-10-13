@@ -9,7 +9,7 @@ describe("the new contact path", :type => :feature) do
     click_link("New")
     fill_in('first_name', :with => "John")
     fill_in('last_name', :with => "Smith")
-    fill_in('street_address', :with => "5555")
+    fill_in('street_address', :with => "5555 Ersatz Ave.")
     fill_in('city', :with => "Long Beach")
     fill_in('state', :with => "CA")
     fill_in('zip_code', :with => 90210)
@@ -22,7 +22,7 @@ describe("the new contact path", :type => :feature) do
     click_button("Save Contact")
     click_link("Smith, John")
     expect(page).to(have_content("Smith, John"))
-    expect(page).to(have_content("5555 Long Beach, CA 90210"))
+    expect(page).to(have_content("5555 Ersatz Ave. Long Beach, CA 90210"))
     expect(page).to(have_content("(626) 555-5555"))
     expect(page).to(have_content("fake@aol.com"))
     expect(page).to(have_content("Certified Miner On-Duty"))
@@ -61,6 +61,14 @@ describe("the attribute creation path", :type => :feature) do
   end
   
   it("adds an address to an existing contact") do
+    visit('/')
+    click_link("Smith, John")
+    fill_in('street_address', :with => "4444 East Fake St.")
+    fill_in('city', :with => "Huntington Beach")
+    fill_in('state', :with => "CA")
+    fill_in('zip_code', :with => 65810)
+    click_button("Add Address")
+    expect(page).to(have_content("4444 East Fake St. Huntington Beach, CA 65810"))
   end
   
   it("adds an email address to an existing contact") do
