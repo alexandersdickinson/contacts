@@ -98,5 +98,10 @@ describe("the attribute deletion path", :type => :feature) do
   end
   
   it('deletes an email address from an existing contact') do
+    visit('/')
+    click_link("Smith, John")
+    click_button("email-delete1")
+    expect(page).to(have_content("fake@aol.com"))
+    expect(page).not_to(have_content("ersatz@gmail.com"))
   end
 end

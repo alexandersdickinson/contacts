@@ -75,8 +75,16 @@
 </form>
 
 <h2>Email</h2>
-	<%@emails.each() do |email|%>
-		<h3><li><%= email%></li></h3>
+	<%@emails.each_with_index() do |email, i|%>
+		<h3><li>
+			<%= email%>
+			<form action='/<%= @contact.id()%>/delete_email' method='post'>
+				<div class='form-group'>
+					<input id='email-delete-form' name='email-delete-form' type='hidden' value='<%= i%>'>
+				</div>
+				<button type='submit' id='email-delete<%= i%>' class='btn btn-danger'>Delete</button>
+			</form>
+		</li></h3>
 	<%end%>
 </h2>
 <form action='/<%= @contact.id()%>/new_email' method='post'>

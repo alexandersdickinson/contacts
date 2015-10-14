@@ -86,3 +86,13 @@ post('/:id/delete_address') do
   @header = "#{@contact.last_name()}, #{@contact.first_name()}"
   erb(:contact)
 end
+
+post('/:id/delete_email') do
+  @contact = Contact.find(params.fetch('id').to_i())
+  @contact.delete_email(params.fetch('email-delete-form').to_i())
+  @phone_numbers = @contact.phone()
+  @addresses = @contact.address()
+  @emails = @contact.email()
+  @header = "#{@contact.last_name()}, #{@contact.first_name()}"
+  erb(:contact)
+end
