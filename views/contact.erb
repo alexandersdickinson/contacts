@@ -1,12 +1,18 @@
 <h1><%= @contact.job_title()%></h1>
 <h2>Address</h2>
 <ul>
-	<%@addresses.each() do |address|%>
+	<%@addresses.each_with_index() do |address, i|%>
 		<h3><li>
 			<%address.to_s().each_line() do |line|%>
 				<%= line%>
 				<br>
 			<%end%>
+			<form action='/<%= @contact.id()%>/delete_address' method='post'>
+				<div class='form-group'>
+					<input name='address-delete-form' id='address-delete-form' type='hidden' value="<%= i%>">
+				</div>
+				<button class'btn btn-danger' id='address-delete<%= i%>' type='submit'>Delete</button>
+			</form>
 		</li></h3>
 	<%end%>
 </ul>

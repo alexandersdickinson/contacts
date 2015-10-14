@@ -88,4 +88,15 @@ describe("the attribute deletion path", :type => :feature) do
     expect(page).to(have_content("(626) 555-5555"))
     expect(page).not_to(have_content("(626) 555-0199"))
   end
+  
+  it("deletes an address from an existing contact") do
+    visit('/')
+    click_link("Smith, John")
+    click_button("address-delete1")
+    expect(page).to(have_content("5555 Ersatz Ave. Long Beach, CA 90210"))
+    expect(page).not_to(have_content("4444 East Fake St. Huntington Beach, CA 65810"))
+  end
+  
+  it('deletes an email address from an existing contact') do
+  end
 end
