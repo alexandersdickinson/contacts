@@ -56,3 +56,23 @@ post('/:id/new_address') do
   @header = "#{@contact.last_name()}, #{@contact.first_name()}"
   erb(:contact)
 end
+
+post('/:id/new_email') do
+  @contact = Contact.find(params.fetch('id').to_i())
+  @contact.add_email("ersatz@gmail.com")
+  @phone_numbers = @contact.phone()
+  @addresses = @contact.address()
+  @emails = @contact.email()
+  @header = "#{@contact.last_name()}, #{@contact.first_name()}"
+  erb(:contact)
+end
+
+post('/:id/delete_phone') do
+  @contact = Contact.find(params.fetch('id').to_i())
+  @contact.delete_phone(params.fetch('phone-delete-form').to_i())
+  @phone_numbers = @contact.phone()
+  @addresses = @contact.address()
+  @emails = @contact.email()
+  @header = "#{@contact.last_name()}, #{@contact.first_name()}"
+  erb(:contact)
+end

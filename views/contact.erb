@@ -30,8 +30,16 @@
 
 <h2>Phone</h2>
 <ul>
-	<%@phone_numbers.each() do |number|%>
-		<h3><li><%= number%></li></h3>
+	<%@phone_numbers.each_with_index() do |number, i|%>
+		<h3><li>
+			<%= number%>
+			<form action='/<%= @contact.id%>/delete_phone' method='post'>
+				<div class='form-group'>
+					<input name='phone-delete-form' id='phone-delete-form' type='hidden' value="<%= i%>">
+				</div>
+				<button class='btn btn-danger' id="phone-delete<%= i%>" type='submit'>Delete</button>
+			</form>
+		</li></h3>
 	<%end%>
 </ul>
 <form action='/<%= @contact.id()%>/new_phone' method='post'>
@@ -57,7 +65,7 @@
 		    </label>
 		</div>
 	</div>
-	<button type='submit' class='btn btn-primary'>Add Phone Number</button>
+	<button id='add-phone' type='submit' class='btn btn-primary'>Add Phone Number</button>
 </form>
 
 <h2>Email</h2>
@@ -65,3 +73,10 @@
 		<h3><li><%= email%></li></h3>
 	<%end%>
 </h2>
+<form action='/<%= @contact.id()%>/new_email' method='post'>
+	<div class='form-group col-md-6'>
+		<label for='email'>Email</label>
+		<input id='email' name='email' class='form-control' type='text'>
+	</div>
+	<button type='submit' class='btn btn-primary'>Add Email</button>
+</form>

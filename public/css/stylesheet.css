@@ -20,3 +20,7 @@
 	width: 45px;
 	margin: auto 10px;
 }
+
+.delete-item{
+	display:inline-block;
+}

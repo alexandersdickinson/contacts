@@ -56,7 +56,7 @@ describe("the attribute creation path", :type => :feature) do
     fill_in('first_three_digits', :with => "555")
     fill_in('last_four_digits', :with => "0199")
     choose("Mobile")
-    click_button("Add Phone Number")
+    click_button("add-phone")
     expect(page).to(have_content("(626) 555-0199"))
   end
   
@@ -72,5 +72,20 @@ describe("the attribute creation path", :type => :feature) do
   end
   
   it("adds an email address to an existing contact") do
+    visit('/')
+    click_link("Smith, John")
+    fill_in('email', :with => "ersatz@gmail.com")
+    click_button("Add Email")
+    expect(page).to(have_content("ersatz@gmail.com"))
+  end
+end
+
+describe("the attribute deletion path", :type => :feature) do
+  it("deletes a phone number from an existing contact") do
+    visit('/')
+    click_link("Smith, John")
+    click_button("phone-delete1")
+    expect(page).to(have_content("(626) 555-5555"))
+    expect(page).not_to(have_content("(626) 555-0199"))
   end
 end
