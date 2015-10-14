@@ -11,7 +11,7 @@
 				<div class='form-group'>
 					<input name='address-delete-form' id='address-delete-form' type='hidden' value="<%= i%>">
 				</div>
-				<button class'btn btn-danger' id='address-delete<%= i%>' type='submit'>Delete</button>
+				<button class='btn btn-danger' id='address-delete<%= i%>' type='submit'>Delete</button>
 			</form>
 		</li></h3>
 	<%end%>
@@ -88,9 +88,14 @@
 	<%end%>
 </h2>
 <form action='/<%= @contact.id()%>/new_email' method='post'>
-	<div class='form-group col-md-6'>
-		<label for='email'>Email</label>
-		<input id='email' name='email' class='form-control' type='text'>
+	<div class='row'>
+		<div class='form-group col-md-6'>
+			<label for='email'>Email</label>
+			<input id='email' name='email' class='form-control' type='text'>
+		</div>
 	</div>
 	<button type='submit' class='btn btn-primary'>Add Email</button>
 </form>
+
+<br>
+<a href='/' class='btn btn-primary'>Back</a>
